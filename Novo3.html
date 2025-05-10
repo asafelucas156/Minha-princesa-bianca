@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Princesa Bianca</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ffe4f0, #ffc6dc);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.8em;
+            color: #d63384;
+            margin-top: 40px;
+        }
+        #mensagem {
+            text-align: center;
+            color: #a8005e;
+            font-size: 1.8em;
+            margin-top: 60px;
+            min-height: 50px;
+        }
+        #proximo, #ativarMusica {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #proximo:hover, #ativarMusica:hover {
+            background-color: #ff1493;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            transform: rotate(45deg);
+            animation: float 10s linear infinite;
+            opacity: 0.7;
+        }
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: -10px;
+            top: 0;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão para ativar música -->
+    <button id="ativarMusica" onclick="ativarMusica()">Ativar Música</button>
+
+    <h1>Minha Princesa Bianca 💖</h1>
+    <div id="mensagem"></div>
+    <button id="proximo" onclick="mostrarProxima()">Mostrar próxima mensagem</button>
+
+    <div id="musicaContainer" style="display:none;"></div>
+
+    <script>
+        const mensagens = [
+            "Oi, minha neném! 🥰",
+            "Você é a razão do meu sorriso! ✨",
+            "Estar com você é um sonho lindo. ❤️",
+            "Minha princesa, meu amor eterno. 👑",
+            "Seu jeitinho me conquista todos os dias. 🌷",
+            "Prometo cuidar de você sempre. 💍",
+            "Eu te amo muito, minha neném! 💘"
+        ];
+        let index = 0;
+
+        function mostrarProxima() {
+            if (index < mensagens.length) {
+                document.getElementById("mensagem").textContent = mensagens[index];
+                index++;
+                if (index === mensagens.length) {
+                    document.getElementById("proximo").textContent = "Fim das mensagens!";
+                    document.getElementById("proximo").disabled = true;
+                }
+            }
+        }
+
+        function ativarMusica() {
+            const container = document.getElementById("musicaContainer");
+            container.innerHTML = `
+                <iframe width="0" height="0"
+                    src="https://www.youtube.com/embed/uuZE_IRwLNI?autoplay=1&loop=1&playlist=uuZE_IRwLNI"
+                    title="Mirrors - Justin Timberlake" frameborder="0"
+                    allow="autoplay; encrypted-media"
+                    allowfullscreen></iframe>`;
+            document.getElementById("ativarMusica").style.display = "none";
+        }
+
+        for (let i = 0; i < 30; i++) {
+            let heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+            document.body.appendChild(heart);
+        }
+    </script>
+</body>
+</html>
